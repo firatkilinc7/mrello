@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UseropController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+
+Route::group(['prefix'=>'','middleware'=>'CheckLogin'], function (){
+
+    /*
+    * Kullanıcı girişi gereken sayfalar buraya yazılacak!
+    */
+
 });
+
+
+Route::get("login", [UseropController::class, "loginForm"])->name("loginForm");
+
+
+
+

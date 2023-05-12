@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('pano_id')->references('id')->on('pano');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
