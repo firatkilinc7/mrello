@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class UseropController extends Controller
 {
     public function loginForm(){
-
+        //TODO: FRONT END EKLENINCE LOGIN FORM A GIDILECEK
     }
 
     public function doLogin(Request $request){
@@ -47,7 +47,7 @@ class UseropController extends Controller
     }
 
     public function registerForm(){
-
+        //TODO: FRONT END EKLENINCE REGISTER FORM A GIDILECEK
     }
 
     public function doRegister(Request $request){
@@ -98,5 +98,101 @@ class UseropController extends Controller
         Auth::logout();
         return redirect()->route();
     }
+
+    public function showProfile(){
+
+        $user = Auth::user();
+
+        //TODO: FRONT END EKLENINCE $user ILE BIRLIKTE PROFILIM SAYFASINA GIDILECEK
+
+    }
+
+    public function updateProfile(){
+        $user = Auth::user();
+
+        //TODO: FRONT END EKLENINCE $user ILE BIRLIKTE PROFILI GUNCELLE SAYFASINA GIDILECEK
+    }
+
+    public function saveUpdatedProfile(Request $request){
+
+        $user = Auth::user();
+
+        $validator = Validator::make($request->post(), [
+            "fullname"  => "required",
+        ], [
+            "required"  => ":Attribute alanı doldurulmalıdır.",
+            "min"       => ":Attribute, 8 karakterden fazla olmalıdır",
+            "max"       => ":Attribute, 20 karakteri geçmemelidir.",
+            "same"      => "Şifreler birbirleri ile uyuşmuyor!",
+            "unique"    => ":Attribute daha önceden alınmış!"
+        ], [
+            "fullname"  => "Ad Soyad",
+            "username"  => "Kullanıcı adı",
+            "email"     => "E-mail",
+            "password"  => "Şifre",
+            "password2" => "Tekrar Şifre",
+        ]);
+
+        if($user->email != $request->email){
+            $validator->setRules([
+                "email"       => "required | email | unique:users,email",
+
+            ]);
+        }
+        if($user->username != $request->username){
+            $validator->setRules([
+                "username"    => "required | max:20 | unique:users,username"
+            ]);
+        }
+        if(isset($request->old_password) or isset($request->password) or isset($request->re_password)){
+            $validator->setRules([
+                "old_password" => "required | min:8 | max:20",
+                "password"     => "required | min:8 | max:20 | same:re_password",
+                "password2"    => "required | same:password",
+            ]);
+        }
+
+        if (!$validator->fails()){
+
+            if(isset($request->password)){
+
+                if($user->password == md5($request->old_password)){
+                    $dbUser = User::find($user->id);
+                    $dbUser->password = md5($request->password);
+                    $dbUser->save();
+                }
+                else{
+                    //TODO: ESKI SIFRE YANLIS, ALERT VER VE PROFIL GUNCELLEME SAYFASINA DON
+                }
+            }
+
+            $dbUser = User::find($user->id);
+            $dbUser->username = $request->username;
+            $dbUser->fullname = $request->fullname;
+            $dbUser->email    = $request->email;
+
+            if($dbUser->save()){
+
+                //TODO: ALERT VER ISLEM BASARILI
+
+            }else{
+
+                //TODO: ALERT VER ISLEM BASARISIZ
+
+            }
+
+            //TODO: PROFILIM SAYFASINA GIT
+
+        }else{
+            return Redirect::back()->withErrors($validator);
+        }
+
+
+
+    }
+
+
+
+
 
 }
