@@ -12,6 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table= "users";
+    public $primaryKey = "id";
+    public $timestamps = true;
+
     protected $fillable = [
         'name',
         'username',
@@ -19,5 +23,9 @@ class User extends Authenticatable
         'password',
         'img_url',
     ];
+
+    public function blogs(){
+        return $this->belongsToMany(PanoModel::class, "panometa", "user_id", "pano_id");
+    }
 
 }
