@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PanoModel extends Model
+class ListModel extends Model
 {
-    protected $table= "pano";
+    protected $table= "list";
     public $primaryKey = "id";
     public $timestamps = true;
 
     protected $fillable = [
-        "title",
+        "pano_id",
+        "name",
         "slug",
     ];
 
@@ -20,12 +21,11 @@ class PanoModel extends Model
         "id",
     ];
 
-    public function UserAccess(){
-        return $this->belongsToMany(PanoMetaModel::class, "panometa" , "pano_id", "user_id");
-    }
-
     public function parentPano(){
-        return $this->hasMany(ListModel::class, "pano_id");
+        return $this->belongsTo(PanoModel::class, "pano_id");
     }
 
+    public function parentList(){
+        return $this->hasMany(TaskModel::class, "list_id");
+    }
 }

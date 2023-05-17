@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UseropController;
+use App\Http\Controllers\PanoController;
 
 /*
 |--------------------------------------------------------------------------
