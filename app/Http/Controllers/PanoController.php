@@ -10,6 +10,18 @@ use Illuminate\Http\Request;
 
 class PanoController extends Controller
 {
+
+    public function indexExample(){
+
+        $folder = array(
+            "viewFolder"    => "front",
+            "subViewFolder" => "home",
+            "transaction"   => "",
+        );
+        return view("front.index")->with(compact("folder"));
+
+    }
+
     public function addPanoAndUserEXAMPLE(){
 
         // PANO VE BU PANOYA BIRDEN FAZLA USER EKLEME ORNEGI
@@ -43,7 +55,7 @@ class PanoController extends Controller
 
     public function addTaskExample(){
 
-        $list = ListModel::find(1);
+        $list = ListModel::find(2);
         $task = new TaskModel();
         $task->title = "NEW TASKK TEST";
         $task->content = "TESTASD";

@@ -29,6 +29,7 @@ Route::group(['prefix'=>'','middleware'=>'CheckLogin'], function (){
 
 Route::get("login", [UseropController::class, "loginForm"])->name("loginForm");
 
+Route::get("/", [PanoController::class, "indexExample"]);
 
 
 
