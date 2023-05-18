@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->timestamps();
-            $table->foreign('pano_id')->references('id')->on('pano');
+            $table->foreign('pano_id')->references('id')->on('pano')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

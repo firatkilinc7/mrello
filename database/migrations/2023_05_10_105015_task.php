@@ -18,7 +18,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('slug');
             $table->timestamps();
-            $table->foreign('list_id')->references('id')->on('list');
+            $table->foreign('list_id')->references('id')->on('list')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
