@@ -20,8 +20,8 @@ class PanoModel extends Model
         "id",
     ];
 
-    public function UserAccess(){
-        return $this->belongsToMany(PanoMetaModel::class, "panometa" , "pano_id", "user_id");
+    public function userAccess(){
+        return $this->belongsToMany(User::class, "panometa" , "pano_id", "user_id");
     }
 
     public function parentPano(){

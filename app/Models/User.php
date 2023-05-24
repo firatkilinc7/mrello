@@ -24,7 +24,7 @@ class User extends Authenticatable
         'img_url',
     ];
 
-    public function blogs(){
+    public function getPano(){
         return $this->belongsToMany(PanoModel::class, "panometa", "user_id", "pano_id");
     }
 

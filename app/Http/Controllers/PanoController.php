@@ -64,7 +64,41 @@ class PanoController extends Controller
         $list->parentList()->save($task);
 
         dd("ok");
+    }
 
+    public function getUsersPano(){
+        // KULLANICININ SAHİP OLDUĞU PANOLARI GETİR
+
+        $user = User::find(2);
+        $panolar = $user->getPano;
+        foreach ($panolar as $pano){
+            echo($pano->title);
+        }
+    }
+
+    public function getListParent(){
+        // LIST IN BAĞLI OLDUĞU PANOYU GETİRME
+
+        $list = ListModel::find(1);
+        $parentPano = $list->parentPano;
+        dd($parentPano);
+    }
+
+    public function getTaskParent(){
+        //TASKIN BAĞLI OLDUĞU PANOYU GETİRME
+
+        $task = TaskModel::find(1);
+        $parentTask = $task->parentList;
+        dd($parentTask);
+    }
+
+    public function getTasksPano(){
+        //TASKIN BAĞLI OLDUĞU LİSTİN BAĞLI OLDUĞU PANOYU GETİRME
+
+        $task = TaskModel::find(1);
+        $parentPano = $task->parentList->parentPano;
+
+        dd($parentPano);
 
     }
 
