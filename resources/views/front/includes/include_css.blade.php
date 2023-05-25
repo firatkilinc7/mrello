@@ -15,13 +15,12 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
     />
-    <link rel="stylesheet" href="{{asset("assets/front/css/bootstrap-grid.css"/>
-    <link rel="stylesheet" href="{{asset("assets/front/css/main.css"/>
-    <link rel="stylesheet" href="{{asset("assets/front/css/reset.css"/>
-    <link rel="stylesheet" href="{{asset("assets/front/css/responsive.css"/>
-    <link rel="icon" href="{{asset("assets/front/images/favicon.ico.svg"/>
+    <link rel="stylesheet" href="{{asset("assets/front/css/bootstrap-grid.css")}}"/>
+    <link rel="stylesheet" href="{{asset("assets/front/css/main.css")}}"/>
+    <link rel="stylesheet" href="{{asset("assets/front/css/reset.css")}}"/>
+    <link rel="stylesheet" href="{{asset("assets/front/css/responsive.css")}}"/>
+    <link rel="icon" href="{{asset("assets/front/images/favicon.ico.svg")}}"/>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.css"
     />
-    

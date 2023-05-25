@@ -4,7 +4,7 @@
           <p class="header__board-txt">Mert Cevik's Board</p>
         </div>
         <a href="" class="header__logo">
-          <img src="images/logo.png" alt="logo" class="header__logo" />
+          <img src="{{asset("assets/front/images/logo.png")}}" alt="logo" class="header__logo" />
         </a>
         <div class="wrapper">
           <div class="search__box">
@@ -13,7 +13,7 @@
           </div>
           <div class="user__icon">
             <div class="ui floating dropdown">
-              <img src="images/user.png" alt="user" class="user__icon-foto" />
+              <img src="{{asset("assets/front/images/user.png")}}" alt="user" class="user__icon-foto" />
               <i class="dropdown icon"></i>
               <div class="menu">
                 <div class="item">Profile</div>
@@ -22,7 +22,7 @@
             </div>
           </div>
         <div class="user__icon-mobile">
-          <img src="images/user.png" alt="user" class="user__icon-foto" />
+          <img src="{{asset("assets/front/images/user.png")}}" alt="user" class="user__icon-foto" />
         </div>
       </div>
       <div class="wrapper-mobile">
