@@ -11,7 +11,7 @@
                 id="todoCase"
                 data-column-id="1"
               ></div>
-              <button class="btn__dashboard btn__add" id="btn-add">
+              <button class="btn__dashboard btn__add" id="btn-add" onclick="addTask()">
                 <i class="plus icon"></i>Add task
               </button>
             </div>
@@ -172,3 +172,20 @@
         </div>
       </div>
     </div>
+
+<script>
+
+    function addTask() {
+        const todo = new TodoConstructor(
+            inputTitle.value,
+            document.getElementById("inputDescription").value,
+            imgAvatar,
+            todoUser,
+            todoId,
+            column
+        );
+    }
+
+
+
+</script>

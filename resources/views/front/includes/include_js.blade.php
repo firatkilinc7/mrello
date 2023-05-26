@@ -6,7 +6,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="{{asset('assets/front/js/createCard.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="{{asset('assets/front/js/main.js')}}"></script>
-    <script src="{{asset('assets/front/js/responsive.js')}}"></script>
-    <script src="{{asset('assets/front/js/usersGenerate.js')}}"></script>
+
