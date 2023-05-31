@@ -29,10 +29,12 @@ Route::group(['prefix'=>'','middleware'=>'CheckLogin'], function (){
 
 Route::get("login", [UseropController::class, "loginForm"])->name("loginForm");
 
-Route::get("/", [PanoController::class, "indexExample"]);
 
+Route::get("/", [PanoController::class, "index"]);
 
-Route::post("task/create", [PanoController::class, "testASD"]);
+// AJAX CAGRILARI POST METOTLARI
+Route::post("task/create", [PanoController::class, "createTask"]);
+Route::post("task/delete", [PanoController::class, "deleteTask"]);
 
 
 

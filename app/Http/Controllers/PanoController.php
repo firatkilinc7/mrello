@@ -7,20 +7,44 @@ use App\Models\PanoModel;
 use App\Models\TaskModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Promise\task;
 
 class PanoController extends Controller
 {
 
-    public function indexExample(){
+    public function index(){
+
+        $lists = ListModel::all();
+        $tasks = TaskModel::all();
 
         $folder = array(
             "viewFolder"    => "front",
             "subViewFolder" => "home",
             "transaction"   => "",
         );
-        return view("front.index")->with(compact("folder"));
+        return view("front.index")->with(compact("folder", "lists", "tasks"));
 
     }
+
+    public function createTask(Request $request){
+
+        $newTask = new TaskModel();
+        $newTask->list_id = $request->listId;
+        $newTask->title   = $request->title;
+        $newTask->content = $request->description;
+        $newTask->save();
+
+        return ['success' => true];
+    }
+
+    public function deleteTask(Request $request){
+        $task = TaskModel::find($request->taskId);
+        $task->delete();
+
+        return ['success' => true];
+    }
+
+
 
     public function addPanoAndUserEXAMPLE(){
 

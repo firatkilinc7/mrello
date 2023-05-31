@@ -25,7 +25,7 @@ class ListModel extends Model
         return $this->belongsTo(PanoModel::class, "pano_id");
     }
 
-    public function parentList(){
+    public function getTasks(){
         return $this->hasMany(TaskModel::class, "list_id");
     }
 }

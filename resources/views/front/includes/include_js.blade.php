@@ -9,7 +9,8 @@
     ></script>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="{{asset('assets/front/js/maisn.js')}}"></script>
+    <!-- <script src="{{asset('assets/front/js/maisn.js')}}"></script> !-->
+
     <script src="{{asset('assets/front/js/asd.js')}}"></script>
 
 
