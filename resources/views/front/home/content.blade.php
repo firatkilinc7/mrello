@@ -1,38 +1,105 @@
+<head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+</head>
+
+
 <section class="section-dashboard">
       <div class="wrapper__dashboard swiper" id="root">
         <div class="swiper-wrapper">
+
+
+
           <div class="swiper-slide">
             <div class="dashboard dashboard__toDo">
               <div class="dashboard__content">
                 <h2 class="title1 dashboard__title">To Do</h2>
               </div>
-              <div
+
+                <div class="card__todo" data-trello-id="1685100915511" id="todo-id"><div class="card_top"><h3 class="card__todo-title title4">uh</h3><div class="card__todo-title">13:29:46</div></div><div class="todo-description">hu</div><div class="card_bottom"><div class="user"><img class="card__todo-author" src="https://avatars.dicebear.com/api/bottts/4.svg"><p class="todo__user-name">Chelsey Dietrich</p></div><div class="card__todo-btns"><a class="card__todo-edit"><i class="edit icon" data-type="edit-card"></i></a><a class="card__todo-delete"><i class="trash alternate icon" data-type="delete-one"></i></a></div></div></div>
+
+                <div
                 class="dashboard__cards-todo"
                 id="todoCase"
                 data-column-id="1"
               ></div>
-              <button class="btn__dashboard btn__add" id="btn-add" onclick="addTask()">
+              <button class="btn__dashboard btn__add" id="btn-add" data-list-id="">
                 <i class="plus icon"></i>Add task
               </button>
+                <hr>
+                <button class="btn__dashboard btn__delete">Delete all</button>
             </div>
           </div>
-          <div class="swiper-slide">
-            <div class="dashboard dashboard__inProgress">
-              <div class="dashboard__content">
-                <h2 class="title1 dashboard__title">In Progress</h2>
-              </div>
-              <div class="dashboard__cards-inProgress" data-column-id="2"></div>
+
+
+
+            <div class="swiper-slide">
+                <div class="dashboard dashboard__toDo">
+                    <div class="dashboard__content">
+                        <h2 class="title1 dashboard__title">To Do</h2>
+                    </div>
+
+                    <div class="card__todo" data-trello-id="1685100915511" id="todo-id"><div class="card_top"><h3 class="card__todo-title title4">uh</h3><div class="card__todo-title">13:29:46</div></div><div class="todo-description">hu</div><div class="card_bottom"><div class="user"><img class="card__todo-author" src="https://avatars.dicebear.com/api/bottts/4.svg"><p class="todo__user-name">Chelsey Dietrich</p></div><div class="card__todo-btns"><a class="card__todo-edit"><i class="edit icon" data-type="edit-card"></i></a><a class="card__todo-delete"><i class="trash alternate icon" data-type="delete-one"></i></a></div></div></div>
+
+
+
+                    <div
+                        class="dashboard__cards-todo"
+                        id="todoCase"
+                        data-column-id="1"
+                    ></div>
+                    <button class="btn__dashboard btn__add" id="btn-add">
+                        <i class="plus icon"></i>Add task
+                    </button>
+                    <hr>
+                    <button class="btn__dashboard btn__delete">Delete all</button>
+                </div>
             </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="dashboard dashboard__done">
-              <div class="dashboard__content">
-                <h2 class="title1 dashboard__title">Done</h2>
-              </div>
-              <div class="dashboard__cards-done" data-column-id="3"></div>
-              <button class="btn__dashboard btn__delete">Delete all</button>
+            <div class="swiper-slide">
+                <div class="dashboard dashboard__toDo">
+                    <div class="dashboard__content">
+                        <h2 class="title1 dashboard__title">To Do</h2>
+                    </div>
+
+                    <div class="card__todo" data-trello-id="1685100915511" id="todo-id"><div class="card_top"><h3 class="card__todo-title title4">uh</h3><div class="card__todo-title">13:29:46</div></div><div class="todo-description">hu</div><div class="card_bottom"><div class="user"><img class="card__todo-author" src="https://avatars.dicebear.com/api/bottts/4.svg"><p class="todo__user-name">Chelsey Dietrich</p></div><div class="card__todo-btns"><a class="card__todo-edit"><i class="edit icon" data-type="edit-card"></i></a><a class="card__todo-delete"><i class="trash alternate icon" data-type="delete-one"></i></a></div></div></div>
+
+
+
+                    <div
+                        class="dashboard__cards-todo"
+                        id="todoCase"
+                        data-column-id="1"
+                    ></div>
+                    <button class="btn__dashboard btn__add" id="btn-add">
+                        <i class="plus icon"></i>Add task
+                    </button>
+                    <hr>
+                    <button class="btn__dashboard btn__delete">Delete all</button>
+                </div>
+            </div><div class="swiper-slide">
+                <div class="dashboard dashboard__toDo">
+                    <div class="dashboard__content">
+                        <h2 class="title1 dashboard__title">To Do</h2>
+                    </div>
+
+                    <div class="card__todo" data-trello-id="1685100915511" id="todo-id"><div class="card_top"><h3 class="card__todo-title title4">uh</h3><div class="card__todo-title">13:29:46</div></div><div class="todo-description">hu</div><div class="card_bottom"><div class="user"><img class="card__todo-author" src="https://avatars.dicebear.com/api/bottts/4.svg"><p class="todo__user-name">Chelsey Dietrich</p></div><div class="card__todo-btns"><a class="card__todo-edit"><i class="edit icon" data-type="edit-card"></i></a><a class="card__todo-delete"><i class="trash alternate icon" data-type="delete-one"></i></a></div></div></div>
+
+
+
+                    <div
+                        class="dashboard__cards-todo"
+                        id="todoCase"
+                        data-column-id="1"
+                    ></div>
+                    <button class="btn__dashboard btn__add" id="btn-add">
+                        <i class="plus icon"></i>Add task
+                    </button>
+                    <hr>
+                    <button class="btn__dashboard btn__delete">Delete all</button>
+                </div>
             </div>
-          </div>
+
+
+
         </div>
       </div>
     </section>
@@ -133,24 +200,10 @@
       <div class="content">
         <form class="ui form add" id="form-add">
           <div class="field">
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              class="input-title"
-              id="inputTitle"
-              required
-            />
+            <input type="text" name="title" placeholder="Title" class="input-title" id="inputTitle" required/>
           </div>
           <div class="field">
-            <textarea
-              class="input-description"
-              rows="5"
-              name="description"
-              placeholder="Description"
-              id="inputDescription"
-              required
-            ></textarea>
+            <textarea class="input-description" rows="5" name="description" placeholder="Description" id="inputDescription" required></textarea>
           </div>
         </form>
       </div>
@@ -166,25 +219,50 @@
         </div>
         <div class="button-agreement">
           <div class="ui cancel button">Cancel</div>
-          <div class="positive ok ui approve button" id="approveBtn">
-            Confirm
-          </div>
+          <div class="positive ok ui approve button" id="approveBtn" type="button">Confirm</div>
         </div>
       </div>
     </div>
 
 <script>
 
-    function addTask() {
-        const todo = new TodoConstructor(
-            inputTitle.value,
-            document.getElementById("inputDescription").value,
-            imgAvatar,
-            todoUser,
-            todoId,
-            column
-        );
-    }
+
+
+    $(document).ready(function (){
+
+        $("#approveBtn").click(function (){
+
+            var form = document.getElementById("form-add")
+            var formData = new FormData(form);
+
+            var listId = $('#btn-add').data('list-id');
+
+            formData.append('listId', listId);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url        : "{{url('task/create')}}",
+                type       : "POST",
+                data       : formData,
+                cache      : false,
+                processData: false,
+                contentType: false,
+
+                success:function (data){
+
+                    alert("OK");
+                }
+
+            })
+
+
+        })
+    })
 
 
 

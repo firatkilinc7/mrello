@@ -32,4 +32,7 @@ Route::get("login", [UseropController::class, "loginForm"])->name("loginForm");
 Route::get("/", [PanoController::class, "indexExample"]);
 
 
+Route::post("task/create", [PanoController::class, "testASD"]);
+
+
 

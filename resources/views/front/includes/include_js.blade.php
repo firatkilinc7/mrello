@@ -1,4 +1,5 @@
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.6/dragula.min.js"
@@ -6,6 +7,9 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-    <script src="{{asset('assets/front/js/main.js')}}"></script>
+    <script src="{{asset('assets/front/js/maisn.js')}}"></script>
+    <script src="{{asset('assets/front/js/asd.js')}}"></script>
+
 

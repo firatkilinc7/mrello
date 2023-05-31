@@ -103,4 +103,6 @@ class PanoController extends Controller
     }
 
 
+
+
 }
