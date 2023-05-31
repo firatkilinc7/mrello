@@ -150,7 +150,7 @@ i.icon {
 .dashboard__title {
     padding-left: 10px;
     padding-bottom: 10px;
-    color: #eeeeee;
+    color: #ffd369;
     font-weight: bold;
 }
 .btn__dashboard {
@@ -243,7 +243,7 @@ i.icon {
 }
 .card__todo-edit :hover,
 .card__todo-delete :hover {
-    color: darkgrey;
+    color: #ffd369;
 }
 .card__todo-edit {
     padding-right: 10px;
@@ -300,7 +300,7 @@ i.icon {
 }
 
 .pop-up__close-button:hover {
-    background-color: #bfbfbf;
+    background-color: #393e46;
 }
 
 .pop-up__close-button:active {
@@ -391,7 +391,7 @@ i.icon {
 
 .gradient-line {
     height: 20px;
-    background: linear-gradient(90deg, #99b4e3, #7ce0d8);
+    background: linear-gradient(90deg, #ffd369, #393e46, #222831);
 }
 .ui.modal.add__todo {
     border-radius: 20px;
