@@ -21,7 +21,7 @@
                                     <h3 class="card__todo-title title4">{{$task->title}}</h3>
                                     <div class="card__todo-title">{{ $task->created_at == null ? "No Date" : date("d/m/Y", strtotime($task->created_at))}}</div>
                                 </div>
-                                <div class="todo-description">{{$task->title}}</div>
+                                <div class="todo-description">{{$task->content}}</div>
                                 <div class="card_bottom">
                                     <div class="user">
                                         <img class="card__todo-author" src="https://avatars.dicebear.com/api/bottts/4.svg">
@@ -31,7 +31,9 @@
                                         <a class="card__todo-edit" data-task-id="{{$task->id}}">
                                             <i class="edit icon" data-type="edit-card"></i>
                                         </a>
-                                        <a class="card__todo-delete" data-task-id="{{$task->id}}"><i class="trash alternate icon" data-type="delete-one"></i></a>
+                                        <a class="card__todo-delete" data-task-id="{{$task->id}}">
+                                            <i class="trash alternate icon" data-type="delete-one"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +47,7 @@
                         <i class="plus icon"></i>Add task
                       </button>
                         <hr>
-                        <button class="btn__dashboard btn__delete">Delete all</button>
+                        <button class="btn__dashboard btn__delete" data-list-id = "{{$list->id}}">Delete all</button>
                     </div>
                   </div>
             @endforeach
@@ -71,7 +73,7 @@
         </div>
         <div class="actions pop-up__buttons-wrap">
           <button class="negative ui btn btn--light">Cancel</button>
-          <button class="positive ui btn btn--dark">Delete</button>
+          <button class="positive ui btn btn--dark" id="delete-all">Delete</button>
         </div>
       </div>
     </div>
@@ -176,6 +178,8 @@
 
 <script>
 
+    //TASK EKLEME KISMI
+
     $(document).ready(function (){
 
         var listId;
@@ -208,8 +212,8 @@
                 contentType: false,
 
                 success:function (data){
-                    var formData = new FormData(form)
-                    createTodo(formData.get("title"), formData.get("description"), "asd", "asd", "asd")
+                    //TODO: SUCCESS DONDUGUNDE ILGILI TASK EKLENECEK
+                    //createTodo(formData.get("title"), formData.get("description"), "asd", "asd", "asd")
                 }
 
             })
@@ -217,6 +221,8 @@
 
         })
     })
+
+    //TASK SILME KISMI
 
     $(document).ready(function (){
         $('.card__todo-delete').click(function() {
@@ -239,16 +245,86 @@
                 contentType: false,
 
                 success:function (data){
-                    alert("ok");
+                    //TODO: SUCCESS DONDUGUNDE ILGILI TASK SILINECEK
                 }
             })
         });
     });
 
+    //TASK GUNCELLEME KISMI
+
     $(document).ready(function (){
 
+        var taskId;
+
+        $('.card__todo-edit').click(function() {
+            taskId = $(this).data('task-id');
+        });
+
+        $("#editBtn").click(function (){
+            var form = document.getElementById("form-edit")
+            var formData = new FormData(form);
+
+            formData.append('taskId', taskId);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url        : "{{url('task/update')}}",
+                type       : "POST",
+                data       : formData,
+                cache      : false,
+                processData: false,
+                contentType: false,
+
+                success:function (data){
+                    //TODO: SUCCESS DONDUGUNDE ILGILI TASK GUNCELLENECEK
+                    //createTodo(formData.get("title"), formData.get("description"), "asd", "asd", "asd")
+                }
+            })
+        })
     });
 
+
+    //LIST ICINI KOMPLE SILME
+
+    $(document).ready(function (){
+
+        var listId;
+
+        $('.btn__delete').click(function() {
+            listId = $(this).data('list-id');
+        });
+
+        $("#delete-all").click(function (){
+            var formData = new FormData();
+            formData.append('listId', listId);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url        : "{{url('task/delete-all')}}",
+                type       : "POST",
+                data       : formData,
+                cache      : false,
+                processData: false,
+                contentType: false,
+
+                success:function (data){
+                    //TODO: SUCCESS DONDUGUNDE ILGILI TASK GUNCELLENECEK
+                    //createTodo(formData.get("title"), formData.get("description"), "asd", "asd", "asd")
+                }
+            })
+        })
+    });
 
 
 

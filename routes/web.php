@@ -35,6 +35,9 @@ Route::get("/", [PanoController::class, "index"]);
 // AJAX CAGRILARI POST METOTLARI
 Route::post("task/create", [PanoController::class, "createTask"]);
 Route::post("task/delete", [PanoController::class, "deleteTask"]);
+Route::post("task/delete-all", [PanoController::class, "deleteAllTask"]);
+Route::post("task/update", [PanoController::class, "updateTask"]);
+
 
 
 

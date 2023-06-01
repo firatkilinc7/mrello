@@ -6,6 +6,7 @@ use App\Models\ListModel;
 use App\Models\PanoModel;
 use App\Models\TaskModel;
 use App\Models\User;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use function GuzzleHttp\Promise\task;
 
@@ -44,6 +45,23 @@ class PanoController extends Controller
         return ['success' => true];
     }
 
+    public function updateTask(Request $request){
+        $task = TaskModel::find($request->taskId);
+        $task->title   = $request->title;
+        $task->content = $request->description;
+        $task->save();
+
+        return ["success" => true];
+
+    }
+
+    public function deleteAllTask(Request $request){
+        $tasks = ListModel::find($request->listId)->getTasks;
+        foreach ($tasks as $task){
+            $task->delete();
+        }
+        return ["success" => true];
+    }
 
 
     public function addPanoAndUserEXAMPLE(){
