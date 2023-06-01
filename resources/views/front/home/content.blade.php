@@ -16,7 +16,7 @@
 
                         @foreach($list->getTasks as $task)
 
-                            <div class="card__todo" id="todo-id">
+                            <div class="card__todo" id="todo-id" data-task-id = "{{$task->id}}">
                                 <div class="card_top">
                                     <h3 class="card__todo-title title4">{{$task->title}}</h3>
                                     <div class="card__todo-title">{{ $task->created_at == null ? "No Date" : date("d/m/Y", strtotime($task->created_at))}}</div>
@@ -42,6 +42,7 @@
                         class="dashboard__cards-todo"
                         id="todoCase"
                         data-column-id="1"
+                        data-list-id ="{{$list->id}}"
                       ></div>
                       <button class="btn__dashboard btn__add" id="btn-add" data-list-id="{{$list->id}}">
                         <i class="plus icon"></i>Add task
@@ -212,13 +213,23 @@
                 contentType: false,
 
                 success:function (data){
-                    //TODO: SUCCESS DONDUGUNDE ILGILI TASK EKLENECEK
-                    //createTodo(formData.get("title"), formData.get("description"), "asd", "asd", "asd")
+                    //TODO: KULLANICI ISLEMLERI TAMAMLANDIKTAN SONRA PROFIL FOTO VE EKLEYEN KISININ ADI BASILACAK
+
+                    const cardTodoColumn = document.querySelector(`.dashboard__cards-todo[data-list-id="${data["listId"]}"]`);
+
+                    cardTodoColumn.append(
+                        createTodo(
+                            data["title"],
+                            data["description"],
+                            data["created_at"],
+                            data["taskId"],
+                            "https://www.dunyaatlasi.com/wp-content/uploads/2018/09/resim-tablo-nasil-okunur.jpg",
+                            "HEKIR",
+                            "TODOID",
+                        )
+                    );
                 }
-
             })
-
-
         })
     })
 
@@ -245,7 +256,9 @@
                 contentType: false,
 
                 success:function (data){
-                    //TODO: SUCCESS DONDUGUNDE ILGILI TASK SILINECEK
+                    const currentTrello = document.querySelector(`.card__todo[data-task-id="${data["taskId"]}"]`);
+                    const parentElement = currentTrello.parentNode;
+                    parentElement.removeChild(currentTrello);
                 }
             })
         });
@@ -282,8 +295,19 @@
                 contentType: false,
 
                 success:function (data){
-                    //TODO: SUCCESS DONDUGUNDE ILGILI TASK GUNCELLENECEK
-                    //createTodo(formData.get("title"), formData.get("description"), "asd", "asd", "asd")
+                    //TODO: KULLANICI ISLEMLERINDEN SONRA PROFIL FOTO VE FULLNAME DUZENLENECEK
+
+                    const updatedTodoElement = createTodo(
+                        data["title"],
+                        data["description"],
+                        data["created_at"],
+                        data["taskId"],
+                        "https://www.dunyaatlasi.com/wp-content/uploads/2018/09/resim-tablo-nasil-okunur.jpg",
+                        "John Doe"
+                    );
+                    const currentTodoElement = document.querySelector(`.card__todo[data-task-id="${data["taskId"]}"]`);
+                    currentTodoElement.parentNode.replaceChild(updatedTodoElement, currentTodoElement);
+
                 }
             })
         })
@@ -319,13 +343,15 @@
                 contentType: false,
 
                 success:function (data){
-                    //TODO: SUCCESS DONDUGUNDE ILGILI TASK GUNCELLENECEK
-                    //createTodo(formData.get("title"), formData.get("description"), "asd", "asd", "asd")
+
+                    for (var i = 0; i < data.length; i++) {
+                        const currentTrello = document.querySelector(`.card__todo[data-task-id="${data[i]}"]`);
+                        const parentElement = currentTrello.parentNode;
+                        parentElement.removeChild(currentTrello);
+                    }
                 }
             })
         })
     });
-
-
 
 </script>

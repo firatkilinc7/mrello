@@ -8,7 +8,6 @@ use App\Models\TaskModel;
 use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
-use function GuzzleHttp\Promise\task;
 
 class PanoController extends Controller
 {
@@ -35,14 +34,20 @@ class PanoController extends Controller
         $newTask->content = $request->description;
         $newTask->save();
 
-        return ['success' => true];
+        $returnData = $request->all();
+        $returnData["created_at"] = date('d/m/Y');
+        $returnData["taskId"]     = $newTask->id;
+        $returnData["listId"]     = $newTask->parentList->id;
+        return response()->json($returnData);
     }
 
     public function deleteTask(Request $request){
         $task = TaskModel::find($request->taskId);
         $task->delete();
 
-        return ['success' => true];
+        $returnData = $request->all();
+
+        return response()->json($returnData);
     }
 
     public function updateTask(Request $request){
@@ -51,16 +56,22 @@ class PanoController extends Controller
         $task->content = $request->description;
         $task->save();
 
-        return ["success" => true];
+        $returnData = $request->all();
+        $returnData["created_at"] = date('d/m/Y');
+        $returnData["taskId"] = $task->id;
+
+        return response()->json($returnData);
 
     }
 
     public function deleteAllTask(Request $request){
         $tasks = ListModel::find($request->listId)->getTasks;
+        $returnData=[];
         foreach ($tasks as $task){
             $task->delete();
+            array_push($returnData, $task->id);
         }
-        return ["success" => true];
+        return response()->json($returnData);
     }
 
 
