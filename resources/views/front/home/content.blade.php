@@ -28,10 +28,10 @@
                                         <p class="todo__user-name">Chelsey Dietrich</p>
                                     </div>
                                     <div class="card__todo-btns">
-                                        <a class="card__todo-edit" data-task-id="{{$task->id}}">
+                                        <a class="card__todo-edit" onclick="editTask({{$task->id}})" data-task-id="{{$task->id}}">
                                             <i class="edit icon" data-type="edit-card"></i>
                                         </a>
-                                        <a class="card__todo-delete" data-task-id="{{$task->id}}">
+                                        <a class="card__todo-delete" onclick="deleteTask({{$task->id}})" data-task-id="{{$task->id}}">
                                             <i class="trash alternate icon" data-type="delete-one"></i>
                                         </a>
                                     </div>
@@ -214,30 +214,43 @@
 
                 success:function (data){
                     //TODO: KULLANICI ISLEMLERI TAMAMLANDIKTAN SONRA PROFIL FOTO VE EKLEYEN KISININ ADI BASILACAK
-
                     const cardTodoColumn = document.querySelector(`.dashboard__cards-todo[data-list-id="${data["listId"]}"]`);
-
-                    cardTodoColumn.append(
-                        createTodo(
-                            data["title"],
-                            data["description"],
-                            data["created_at"],
-                            data["taskId"],
-                            "https://www.dunyaatlasi.com/wp-content/uploads/2018/09/resim-tablo-nasil-okunur.jpg",
-                            "HEKIR",
-                            "TODOID",
-                        )
-                    );
+                    var html = `
+                                <div class="card__todo" id="todo-id" data-task-id="${data["taskId"]}">
+                                    <div class="card_top">
+                                        <h3 class="card__todo-title title4">${data["title"]}</h3>
+                                        <div class="card__todo-title">${data["created_at"]}</div>
+                                    </div>
+                                    <div class="todo-description">${data["description"]}</div>
+                                    <div class="card_bottom">
+                                        <div class="user">
+                                            <img class="card__todo-author" src="https://avatars.dicebear.com/api/bottts/4.svg">
+                                            <p class="todo__user-name">Chelsey Dietrich</p>
+                                        </div>
+                                        <div class="card__todo-btns">
+                                            <a class="card__todo-edit" onclick="editTask(${data["taskId"]})" data-task-id="${data["taskId"]}">
+                                                <i class="edit icon" data-type="edit-card"></i>
+                                            </a>
+                                            <a class="card__todo-delete" onclick="deleteTask(${data["taskId"]})" data-task-id="${data["taskId"]}">
+                                                <i class="trash alternate icon" data-type="delete-one"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                `;
+                    $(cardTodoColumn).append(html);
+                    addEditBtnEventListener();
                 }
             })
         })
     })
 
+
     //TASK SILME KISMI
 
-    $(document).ready(function (){
-        $('.card__todo-delete').click(function() {
-            var taskId = $(this).data('task-id');
+    function deleteTask(taskId){
+        $(document).ready(function (){
+
             var formData = new FormData();
             formData.append("taskId", taskId);
 
@@ -257,24 +270,26 @@
 
                 success:function (data){
                     const currentTrello = document.querySelector(`.card__todo[data-task-id="${data["taskId"]}"]`);
+                    console.log(currentTrello);
                     const parentElement = currentTrello.parentNode;
                     parentElement.removeChild(currentTrello);
                 }
             })
+
         });
-    });
+    }
+
 
     //TASK GUNCELLEME KISMI
 
-    $(document).ready(function (){
-
         var taskId;
 
-        $('.card__todo-edit').click(function() {
-            taskId = $(this).data('task-id');
-        });
+        function editTask(id){
+            taskId = id;
+        }
 
         $("#editBtn").click(function (){
+
             var form = document.getElementById("form-edit")
             var formData = new FormData(form);
 
@@ -297,20 +312,30 @@
                 success:function (data){
                     //TODO: KULLANICI ISLEMLERINDEN SONRA PROFIL FOTO VE FULLNAME DUZENLENECEK
 
-                    const updatedTodoElement = createTodo(
-                        data["title"],
-                        data["description"],
-                        data["created_at"],
-                        data["taskId"],
-                        "https://www.dunyaatlasi.com/wp-content/uploads/2018/09/resim-tablo-nasil-okunur.jpg",
-                        "John Doe"
-                    );
-                    const currentTodoElement = document.querySelector(`.card__todo[data-task-id="${data["taskId"]}"]`);
-                    currentTodoElement.parentNode.replaceChild(updatedTodoElement, currentTodoElement);
-
+                    const editedTask = document.querySelector(`.card__todo[data-task-id="${data["taskId"]}"]`);
+                    editedTask.querySelector(".card__todo-title").textContent = data["title"];
+                    editedTask.querySelector(".todo-description").textContent = data["description"];
+                    //editedTask.querySelector(".todo__user-name").textContent = data["username"];
+                    //editedTask.querySelector(".todo__user-name").setAttribute("src", data["img_url"]);
                 }
             })
-        })
+        });
+
+
+
+    $(document).ready(function (){
+
+        var taskId;
+
+        function taskUpdate(taskId){
+            alert(taskId);
+        }
+
+        $('.card__todo-edit').click(function() {
+            taskId = $(this).data('task-id');
+        });
+
+
     });
 
 

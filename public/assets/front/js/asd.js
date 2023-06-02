@@ -102,49 +102,51 @@ for (var i = 0; i < btnAdd.length; i++) {
                     $(".modal").modal("hide");
                 },
             });
-
-        $("#form-add").form(formSettings);
-        $(".ui.dropdown").dropdown("restore defaults");
     });
 }
 
 
 //DUZENLEME BUTONU BASILDIĞINDA MODAL I AC
-const btnEdit = document.getElementsByClassName("card__todo-edit");
+function addEditBtnEventListener() {
+    const btnEdit = document.getElementsByClassName("card__todo-edit");
 
-for (var i = 0; i < btnEdit.length; i++) {
-    btnEdit[i].addEventListener("click", () => {
-        const clicked = event.target.closest(".card__todo");
-        const inputTitle = document.getElementById("title-edit");
-        const inputDescription = document.getElementById("desc-edit");
+    for (var i = 0; i < btnEdit.length; i++) {
+        btnEdit[i].addEventListener("click", () => {
+            const clicked = event.target.closest(".card__todo");
+            const inputTitle = document.getElementById("title-edit");
+            const inputDescription = document.getElementById("desc-edit");
 
-        inputTitle.value = clicked.querySelector(".card__todo-title").textContent;
-        inputDescription.value = clicked.querySelector(".todo-description").textContent;
+            inputTitle.value = clicked.querySelector(".card__todo-title").textContent;
+            inputDescription.value = clicked.querySelector(".todo-description").textContent;
 
-        $("#modal_edit")
-            .modal({ blurring: true }, { allowMultiple: true })
-            .modal("show")
-            .modal({
-                onApprove: function () {
-                    $(".modal").modal("hide");
-                },
-            });
-
-        $("#form-edit").form(formSettings);
-        $(".ui.dropdown").dropdown("restore defaults");
-    });
+            $("#modal_edit")
+                .modal({ blurring: true }, { allowMultiple: true })
+                .modal("show")
+                .modal({
+                    onApprove: function () {
+                        $(".modal").modal("hide");
+                    },
+                });
+        });
+    }
 }
+
+addEditBtnEventListener();
+
 
 //DELETE BUTONU TIKLANDIĞINDA UYARI MODAL I AC
+function addDeleteBtnEventListener(){
+    let btnDeleteAll = document.getElementsByClassName("btn__delete");
 
-let btnDeleteAll = document.getElementsByClassName("btn__delete");
+    for (var j = 0; j < btnDeleteAll.length; j++){
 
-for (var j = 0; j < btnDeleteAll.length; j++){
-
-    btnDeleteAll[j].addEventListener("click", (event) => {
-        $(".ui.modal.pop-up__delete-all").modal({ blurring: true }).modal("show");
-    });
+        btnDeleteAll[j].addEventListener("click", (event) => {
+            $(".ui.modal.pop-up__delete-all").modal({ blurring: true }).modal("show");
+        });
+    }
 }
+
+addDeleteBtnEventListener();
 
 
 //Create Task
