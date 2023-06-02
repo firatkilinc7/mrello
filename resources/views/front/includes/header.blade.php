@@ -1,7 +1,7 @@
 <header class="header-area">
       <div class="header__wrapper">
         <div class="header__board">
-          <p class="header__board-txt">Mert Cevik's Board</p>
+          <p class="header__board-txt">Board</p>
         </div>
         <a href="" class="header__logo">
           <img src="{{asset("assets/front/images/logo.png")}}" alt="logo" class="header__logo" />
