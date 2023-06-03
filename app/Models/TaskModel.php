@@ -26,4 +26,8 @@ class TaskModel extends Model
     public function parentList(){
         return $this->belongsTo(ListModel::class, "list_id");
     }
+
+    public function getCreatedBy(){
+        return $this->belongsTo(User::class, "created_by");
+    }
 }

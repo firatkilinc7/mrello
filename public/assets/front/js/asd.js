@@ -88,23 +88,30 @@ drake.on("drop", function (el, target, source, sibling) {
 
 
 //EKLEME BUTONU TIKLANDIGINDA MODAL I AC
-const btnAdd = document.getElementsByClassName("btn__add");
 
-for (var i = 0; i < btnAdd.length; i++) {
-    btnAdd[i].addEventListener("click", () => {
-        inputTitle.value = "";
-        inputDescription.value = "";
-        $("#modal_add")
-            .modal({ blurring: true }, { allowMultiple: true })
-            .modal("show")
-            .modal({
-                onApprove: function () {
-                    $(".modal").modal("hide");
-                },
-            });
-    });
+const inputTitle = document.getElementById("inputTitle");
+const inputDescription = document.getElementById("inputDescription");
+
+function addAddButtonEventListener(){
+    const btnAdd = document.getElementsByClassName("btn__add");
+
+    for (var i = 0; i < btnAdd.length; i++) {
+        btnAdd[i].addEventListener("click", () => {
+            inputTitle.value = "";
+            inputDescription.value = "";
+            $("#modal_add")
+                .modal({ blurring: true }, { allowMultiple: true })
+                .modal("show")
+                .modal({
+                    onApprove: function () {
+                        $(".modal").modal("hide");
+                    },
+                });
+        });
+    }
 }
 
+addAddButtonEventListener();
 
 //DUZENLEME BUTONU BASILDIĞINDA MODAL I AC
 function addEditBtnEventListener() {
@@ -229,5 +236,37 @@ const createTodo = (todoTitle, todoDescription, created_at, taskId, todoImg, tod
 
 $(".ui.dropdown").dropdown();
 
+
+
+//LİST EKLEME BUTONUNA TIKLANDIGINDA MODAL I AC;
+
+const btnAddList = document.querySelector("#btn-add-list");
+const inputListTitle = document.getElementById("listTitle");
+btnAddList.addEventListener("click", () => {
+    inputListTitle.value = "";
+    $("#modal-add-list")
+        .modal({ blurring: true }, { allowMultiple: true })
+        .modal("show")
+        .modal({
+            onApprove: function () {
+                $(".modal").modal("hide");
+            },
+        });
+});
+
+
+//LIST SILME BUTONU ICIN
+function addDeleteListEventListener(){
+    let btnDeleteList = document.getElementsByClassName("btn__delete-list");
+
+    for (var j = 0; j < btnDeleteList.length; j++){
+
+        btnDeleteList[j].addEventListener("click", (event) => {
+            $(".ui.modal.pop-up__delete-list").modal({ blurring: true }).modal("show");
+        });
+    }
+}
+
+addDeleteListEventListener();
 
 

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('pano', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('slug');
             $table->timestamps();
         });
     }

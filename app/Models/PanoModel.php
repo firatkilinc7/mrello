@@ -24,7 +24,7 @@ class PanoModel extends Model
         return $this->belongsToMany(User::class, "panometa" , "pano_id", "user_id");
     }
 
-    public function parentPano(){
+    public function getList(){
         return $this->hasMany(ListModel::class, "pano_id");
     }
 

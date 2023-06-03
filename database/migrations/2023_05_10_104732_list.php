@@ -15,7 +15,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('pano_id');
             $table->string('name');
-            $table->string('slug');
             $table->timestamps();
             $table->foreign('pano_id')->references('id')->on('pano')->onDelete('cascade')->onUpdate('cascade');
         });

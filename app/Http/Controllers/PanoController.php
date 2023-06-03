@@ -8,20 +8,45 @@ use App\Models\TaskModel;
 use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PanoController extends Controller
 {
 
     public function index(){
-        $lists = ListModel::all();
-        $tasks = TaskModel::all();
+
+        $selectedPano = Request::capture()->input("pano");
+
+        if(count(Auth::user()->getPano) == 0){
+            //TODO: HİÇ PANONUZ YOK UYARISI VE PANO OLUSTUR KISMINA GIDILECEK
+            dd("HIC PANONUZ YOK");
+        }
+
+        if ($selectedPano){
+            $usersPano = Auth::user()->getPano->find($selectedPano);
+        }else{
+            $usersPano = Auth::user()->getPano->first();
+        }
+
+        if (!$usersPano){
+            //TODO: PANO BULUNAMADI HATASI
+            dd("PANO BULUNAMADI VEYA YETKINIZ YOK");
+        }
+
+        $lists = $usersPano->getList;
+        $tasks = [];
+
+        foreach ($lists as $list){
+            array_push($tasks, $list->getTasks);
+        }
+
 
         $folder = array(
             "viewFolder"    => "front",
             "subViewFolder" => "home",
             "transaction"   => "",
         );
-        return view("front.index")->with(compact("folder", "lists", "tasks"));
+        return view("front.index")->with(compact("folder", "lists", "tasks", "usersPano"));
 
     }
 
@@ -31,12 +56,12 @@ class PanoController extends Controller
         $newTask->list_id = $request->listId;
         $newTask->title   = $request->title;
         $newTask->content = $request->description;
+        $newTask->created_by = Auth::user()->id;
         $newTask->save();
-
-
 
         $returnData = $request->all();
         $returnData["created_at"] = time();
+        $returnData["created_by"] = Auth::user()->fullname;
         $returnData["taskId"]     = $newTask->id;
         $returnData["listId"]     = $newTask->parentList->id;
         return response()->json($returnData);
@@ -75,6 +100,25 @@ class PanoController extends Controller
         return response()->json($returnData);
     }
 
+    public function createList(Request $request){
+
+        $newList = new ListModel();
+        $newList->pano_id    = $request->panoId;
+        $newList->name       = $request->title;
+        $newList->save();
+
+        $returnData = $request->all();
+        $returnData["id"] = $newList->id;
+        return response()->json($returnData);
+    }
+
+    public function deleteList(Request $request){
+        $deleteList = ListModel::find($request->listId);
+        $deleteList->delete();
+
+        $returnData["id"] = $deleteList->id;
+        return response()->json($returnData);
+    }
 
     public function addPanoAndUserEXAMPLE(){
 

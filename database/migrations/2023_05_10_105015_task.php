@@ -16,9 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('list_id');
             $table->string('title');
             $table->longText('content');
-            $table->string('slug');
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
             $table->foreign('list_id')->references('id')->on('list')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
