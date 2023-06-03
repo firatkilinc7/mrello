@@ -19,7 +19,7 @@
                             <div class="card__todo" id="todo-id" data-task-id = "{{$task->id}}">
                                 <div class="card_top">
                                     <h3 class="card__todo-title title4">{{$task->title}}</h3>
-                                    <div class="card__todo-title">{{ $task->created_at == null ? "No Date" : date("d/m/Y", strtotime($task->created_at))}}</div>
+                                    <div class="card__todo-title">{{ $task->created_at == null ? "No Date" : ( ((time()-strtotime($task->created_at))/86400) >= 1 ? date("d/m/Y", strtotime($task->created_at)) : "Bugün, ".date("H:i", strtotime($task->created_at)))}}</div>
                                 </div>
                                 <div class="todo-description">{{$task->content}}</div>
                                 <div class="card_bottom">
@@ -60,7 +60,7 @@
       <div class="container__pop-up">
         <div class="pop-up__image-wrap">
           <img
-            src="./images/remove.png"
+            src="https://i1.wp.com/ankararesimkursu.net/wp-content/uploads/2021/07/IMG_1464-scaled.jpg"
             alt="remove-icon"
             class="pop-up__image"
           />
@@ -83,7 +83,7 @@
         <div class="image content">
           <div class="ui medium image pop-up__image-wrap">
             <img
-              src="./images/remove.png"
+              src="https://i1.wp.com/ankararesimkursu.net/wp-content/uploads/2021/07/IMG_1464-scaled.jpg"
               alt="remove-icon"
               class="pop-up__image"
             />
@@ -215,11 +215,30 @@
                 success:function (data){
                     //TODO: KULLANICI ISLEMLERI TAMAMLANDIKTAN SONRA PROFIL FOTO VE EKLEYEN KISININ ADI BASILACAK
                     const cardTodoColumn = document.querySelector(`.dashboard__cards-todo[data-list-id="${data["listId"]}"]`);
+
+                    var dateText;
+                    var createdAtDate = data["created_at"]*1000;
+                    var currentDate = new Date().getTime();
+
+                    if(createdAtDate === null){
+                        dateText = "No Date";
+                    }else{
+                        if ((currentDate - createdAtDate) >= 24 * 60 * 60 * 1000) { // 1 günü milisaniye cinsinden hesaplayın
+                            var createdDate = new Date(createdAtDate);
+                            dateText = String(createdDate.getDate()).padStart(2, '0') + "/" + String(createdDate.getMonth() + 1).padStart(2, '0') + "/" + createdDate.getFullYear();
+                        } else {
+                            dateText = "Bugün, " + new Date(createdAtDate).toLocaleTimeString("tr-TR", {
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            });
+                        }
+                    }
+
                     var html = `
                                 <div class="card__todo" id="todo-id" data-task-id="${data["taskId"]}">
                                     <div class="card_top">
                                         <h3 class="card__todo-title title4">${data["title"]}</h3>
-                                        <div class="card__todo-title">${data["created_at"]}</div>
+                                        <div class="card__todo-title">${dateText}</div>
                                     </div>
                                     <div class="todo-description">${data["description"]}</div>
                                     <div class="card_bottom">

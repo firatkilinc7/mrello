@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UseropController;
 use App\Http\Controllers\PanoController;
+use App\Http\Middleware\CheckLogin;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,22 +16,26 @@ use App\Http\Controllers\PanoController;
 |
 */
 
-
-
-
-Route::group(['prefix'=>'','middleware'=>'CheckLogin'], function (){
-
-    /*
-    * Kullanıcı girişi gereken sayfalar buraya yazılacak!
-    */
+Route::group(['middleware'=>CheckLogin::class], function (){
+    Route::get("/", [PanoController::class, "index"])->name("homepage");
 
 });
 
 
+
+
+
+
+
+
+
 Route::get("login", [UseropController::class, "loginForm"])->name("loginForm");
+Route::post("login/do-login", [UseropController::class, "doLogin"]);
+Route::get("logout", [UseropController::class, "doLogout"]);
+Route::post("register/do-register", [UseropController::class, "doRegister"]);
 
 
-Route::get("/", [PanoController::class, "index"]);
+
 
 // AJAX CAGRILARI POST METOTLARI
 Route::post("task/create", [PanoController::class, "createTask"]);

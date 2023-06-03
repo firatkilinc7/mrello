@@ -13,7 +13,6 @@ class PanoController extends Controller
 {
 
     public function index(){
-
         $lists = ListModel::all();
         $tasks = TaskModel::all();
 
@@ -34,8 +33,10 @@ class PanoController extends Controller
         $newTask->content = $request->description;
         $newTask->save();
 
+
+
         $returnData = $request->all();
-        $returnData["created_at"] = date('d/m/Y');
+        $returnData["created_at"] = time();
         $returnData["taskId"]     = $newTask->id;
         $returnData["listId"]     = $newTask->parentList->id;
         return response()->json($returnData);

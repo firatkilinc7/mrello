@@ -227,5 +227,7 @@ const createTodo = (todoTitle, todoDescription, created_at, taskId, todoImg, tod
     return todoCase;
 }
 
+$(".ui.dropdown").dropdown();
+
 
 

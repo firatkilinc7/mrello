@@ -16,8 +16,15 @@
               <img src="{{asset("assets/front/images/user.png")}}" alt="user" class="user__icon-foto" />
               <i class="dropdown icon"></i>
               <div class="menu">
-                <div class="item">Profile</div>
-                <div class="item">Exit</div>
+                  @if(\Illuminate\Support\Facades\Auth::user())
+                      <div class="item" onclick="window.location='{{url("profile")}}'">Profile</div>
+                      <div class="item" onclick="window.location='{{url("logout")}}'">Exit</div>
+                  @else
+                      <div class="item" onclick="window.location='{{url("register")}}'">Register</div>
+                      <div class="item" onclick="window.location='{{url("login")}}'">Login</div>
+                  @endif
+
+
               </div>
             </div>
           </div>
