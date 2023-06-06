@@ -294,3 +294,24 @@ function addEditBtnsEventListener() {
 }
 
 addEditBtnsEventListener();
+
+// Search
+
+const searchModul = document.querySelectorAll(".search__box");
+
+searchModul.forEach((it) => {
+    it.addEventListener("keyup", (event) => {
+        const searchModul = event.target;
+        const todosArr = document.querySelectorAll(".card__todo");
+        let input = searchModul.value;
+        input = input.toLowerCase();
+
+        for (const item of todosArr) {
+            if (!item.textContent.toLowerCase().includes(input)) {
+                item.style.display = "none";
+            } else {
+                item.style.display = "block";
+            }
+        }
+    });
+});

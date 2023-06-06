@@ -9,7 +9,7 @@
         <div class="wrapper">
           <div class="search__box">
             <input type="text" class="search__txt" placeholder="Search..." />
-            <a href="#" class="search__btn"></a>
+
           </div>
           <div class="user__icon">
             <div class="ui floating dropdown">
@@ -35,7 +35,7 @@
       <div class="wrapper-mobile">
         <div class="search__box">
           <input type="text" class="search__txt" placeholder="Search..." />
-          <a href="#" class="search__btn"></a>
+
         </div>
       </div>
     </header>

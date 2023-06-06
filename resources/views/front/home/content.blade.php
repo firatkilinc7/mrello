@@ -14,8 +14,7 @@
                 <div class="swiper-slide" data-list-id="{{$list->id}}">
                     <div class="dashboard dashboard__toDo">
                         <div class="dashboard__content">
-                            <h2 class="title1 dashboard__title"  >{{$list->name}}
-                            </h2>
+                            <h2 class="title1 dashboard__title"  >{{$list->name}}</h2>
                             <div class="card__todo-btns">
                                 <a class="list__todo-edit" onclick="editList({{$list->id}})" data-list-id="{{$list->id}}">
                                     <i class="edit icon" data-type="edit-list"></i>
