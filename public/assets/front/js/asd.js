@@ -269,4 +269,28 @@ function addDeleteListEventListener(){
 
 addDeleteListEventListener();
 
+//List düzenleme
+function addEditBtnsEventListener() {
+    const btnEdit = document.getElementsByClassName("list__todo-edit");
 
+    for (var i = 0; i < btnEdit.length; i++) {
+        btnEdit[i].addEventListener("click", () => {
+            const clicked = event.target.closest(".dashboard__toDo");
+            const inputListTitle = document.getElementById("ListTitle-edit");
+
+            inputListTitle.value = clicked.querySelector(".dashboard__title").textContent;
+
+            $("#modal_editList")
+                .modal({ blurring: true }, { allowMultiple: true })
+                .modal("show")
+                .modal({
+                    onApprove: function () {
+                        $(".modal").modal("hide");
+
+                    },
+                });
+        });
+    }
+}
+
+addEditBtnsEventListener();

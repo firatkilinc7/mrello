@@ -199,6 +199,17 @@ class PanoController extends Controller
         dd($parentPano);
 
     }
+    public function updateList(Request $request){
+        $list = ListModel::find($request->id);
+        $list->name   = $request->title;
+
+        $list->save();
+
+        $returnData = $request->all();
+
+        return response()->json($returnData);
+
+    }
 
 
 

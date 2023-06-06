@@ -44,6 +44,7 @@ Route::post("task/delete-all", [PanoController::class, "deleteAllTask"]);
 Route::post("task/update", [PanoController::class, "updateTask"]);
 Route::post("list/create", [PanoController::class, "createList"]);
 Route::post("list/delete", [PanoController::class, "deleteList"]);
+Route::post("list/update", [PanoController::class, "updateList"]);
 
 
 
